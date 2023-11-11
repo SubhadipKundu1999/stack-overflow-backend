@@ -121,7 +121,7 @@ export const forgotPassword= async (req,res)=>{
         await users.updateOne({email:email},{$set:{resetPasswordToken:token, resetPasswordExpire:Date.now()+15*60*1000}});
        
         // send via email
-        const url = `${process.env.FRONTEND_URL}/Auth/resetPassword/${resetToken}`
+        const url = `${process.env.FRONTEND_URL}Auth/resetPassword/${resetToken}`
         const message =
         `<p>Hello,</p>
         <p>You have requested to reset your password. To complete the password reset process, please click the button below within the next 5 minutes:</p>
