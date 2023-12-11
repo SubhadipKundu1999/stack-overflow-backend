@@ -11,8 +11,7 @@ const app = express();
 // 
 app.use(express.json({extended:true}));      
 app.use(express.urlencoded({ extended:true}))  
-app.use(cors());  
-
+app.use(cors()); 
 dotenv.config();
 
 const port =process.env.PORT || 5000
