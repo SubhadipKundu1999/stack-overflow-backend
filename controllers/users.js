@@ -36,9 +36,7 @@ export const getAllUsers = async (req, res) =>{
 export const getUserById = async (req, res) =>{
     
     try{
-       console.log(req.body.id);
         const user = await Users.findById(req.params.id);
-        console.log("----user",user)
         const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
         res.status(200).json({ result: user, token });
 }
@@ -55,7 +53,6 @@ export const getUserById = async (req, res) =>{
 export const updateProfile= async (req,res)=>{
     const {id:_id} = req.params;
     const {name, about, tags, color, image}= req.body
-    console.log(name, about, tags, color, image);
  if (!mongoose.Types.ObjectId.isValid(_id)) {
     return res.status(404).send("user unavailable...");
   }
@@ -65,7 +62,7 @@ export const updateProfile= async (req,res)=>{
         await updateProfile.save();
         const token = jwt.sign({ email: updateProfile.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
         res.status(200).json({updateProfile});
-        console.log(updateProfile);
+       
     }
     catch(error){
    res.status(405).json({message:error.message});
